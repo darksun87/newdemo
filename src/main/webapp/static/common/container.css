@@ -1,0 +1,191 @@
+body{margin:0;font-family:Verdana, Geneva, sans-serif;}
+img{border:0px;}
+.container1130{ 
+	width:98%;
+	min-width:1130px;
+	margin:0 auto;
+	font-family:Microsoft YaHei;
+}
+.NewTableStyle
+        {
+            BORDER-RIGHT: #CDE0F5 1px solid; 
+            BORDER-TOP: #CDE0F5 1px solid; 
+            BORDER-LEFT: #CDE0F5 1px solid;  
+            BORDER-BOTTOM: #CDE0F5 1px solid; 
+            BORDER-COLLAPSE: collapse; 
+        }
+span.red{
+	color:red;
+}
+.container960{
+	width:98%;
+	min-width:960px;
+	margin:0 auto;
+	font-family:Microsoft YaHei;
+}
+.rows{
+	margin:10px auto;
+    padding-bottom: 10px;
+	width:100%;
+	height:auto;
+	font-family:Microsoft YaHei;
+	overflow:hidden;
+	border:solid 1px #99BBFF;
+}
+.column1{
+	margin-top:20px;
+	margin-left:10%;
+	width:100%;
+	height:25px;
+	float:left;
+	color:#666666;
+	position:relative;
+}
+.column2{
+	margin-top:20px;
+	width:50%;
+	height:25px;
+	float:left;
+	color:#666666;
+	position:relative;
+}
+.column3_2{
+	margin-top:20px;
+	width:66.67%;
+	height:25px;
+	float:left;
+	color:#666666;
+	position:relative;
+}
+.column2cc{
+	margin-top:20px;
+	height:130px; 
+	width:1000px; 
+	margin-left:auto;
+	margin-right:auto;
+	color:#666666;
+	position:relative;
+}
+
+.column3{
+	margin-top:20px;
+	width:33.33%;
+	height:25px;
+	float:left;
+	color:#666666;
+	position:relative;
+}
+.column4{
+    color:red;
+}
+.left{
+	margin-top:2px;
+	width:30%;
+	height:23px;
+	font-family:Microsoft YaHei;
+	font-size:15px;
+	text-align:right;
+	float:left;
+	position:relative;
+}
+.right{
+	width:70%;
+	height:23px;
+	font-family:Microsoft YaHei;
+	font-size:15px;
+	float:left;
+	position:relative;
+}
+.right2{
+	width:70%;
+	height:23px;
+	font-family:Microsoft YaHei;
+	font-size:15px;
+	float:left;
+	position:relative;
+}
+.btnField{
+	margin-right:200px;
+	float:right;
+}
+.separate{
+	width:98%;
+	height:4px;
+	margin-left:auto;
+	margin-right:auto;
+	background:url("../../image/merchant/lo_01.png") repeat;
+	overflow:hidden;
+}
+
+.psmInput,.easyui-datebox{
+	width:200px; 
+	height:25px;
+	color:#666666;
+	line-height:20px;
+	box-sizing: content-box;
+}
+.psmTestarea{
+	width:200px; 
+	height:60px;
+	color:#666666;
+}
+.psmSelect{
+	width:205px; 
+	height:25px;
+	color:#666666;
+}
+/* .psmA{ */
+/* 	text-decoration : none;	 */
+/* } */
+.combo-text{
+	color:#666666;
+}
+/* ����easy-ui�����ɲ�����css��Ϣ������Ƕʽ��ʽ������ʽ��Ч
+.psmCombobox{
+	width:200px; 
+	height:25px;
+} */
+.navContentcc{
+	margin-top:10px;
+	width:100%;
+	height:24px;
+	margin-left:auto;
+	margin-right:auto;
+	font-family:Microsoft YaHei;
+	background:url("../../image/merchant/lo_01.png") repeat;
+	overflow:hidden;
+	border:solid 1px #99BBFF;
+}
+.navContent{
+	margin-top:10px;
+	margin:10px auto;
+	width:98%;
+	min-width:1130px;
+	height:40px;
+	margin-left:auto;
+	margin-right:auto;
+	font-family:Microsoft YaHei;
+	background:url("../../image/merchant/lo_01.png") repeat;
+	overflow:hidden;
+	border:solid 1px #99BBFF;
+}
+.navContentInfo{
+	margin-left:20px;
+	color:#666666;
+	line-height:1.7;
+	font-size:14px;
+	font-weight:bold;
+	float:left;
+}
+.navContentBtn{
+	margin-right:20px;
+	margin-top:5px;
+	min-width:600px;
+	height:30px;
+	float:right;
+}
+.navContentBtn a{
+	height:23px;
+	width:100px;
+	margin-left:5px;
+}

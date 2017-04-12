@@ -1,0 +1,104 @@
+<div id="modalSignetApply" 
+	class="easyui-dialog" 
+	title="My Dialog" 
+	style="width:400px;height:200px;" 
+	data-options="iconCls:'icon-save',modal:true,buttons:#dlg-buttons">
+	<form id="formSignetApply" method="post" action="${rc.contextPath}/signetApply/save.html">
+		<div class="modal-body">
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="id">ID:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="id"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="applyreason">申请理由:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="applyreason"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="signetid">印章:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="signetid"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="dgmTime">副总经理审批时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="dgmTime"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="dgmResult">副总经理审批结果:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="dgmResult"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="dgmSuggest">副总经理意见:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="dgmSuggest"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="gmTime">总经理审批时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="gmTime"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="gmResult">总经理审批结果:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="gmResult"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="gmSuggest">总经理审批意见:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="gmSuggest"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createTime">创建时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateTime">修改时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createUserid">创建人:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateUserid">修改人:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="status">状态:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="status"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="isDeleted">是否删除:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="isDeleted"  readonly="readonly"  />
+    			</div>
+            </div>
+    				</div>
+    	<div class="dlg-buttons">
+    		<button type="button" id="btnSaveSignetApply" onclick="submitSignetApply()" class="submit btn btn-primary">确认</button>
+    		<button type="button" id="backbtn" data-dismiss="modal" class="btn btn-info" >取消</button>
+    	</div>
+</form>
+</div>

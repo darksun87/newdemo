@@ -1,0 +1,62 @@
+<div id="modalFileType" 
+	class="easyui-dialog" 
+	title="My Dialog" 
+	style="width:400px;height:200px;" 
+	data-options="iconCls:'icon-save',modal:true,buttons:#dlg-buttons">
+	<form id="formFileType" method="post" action="${rc.contextPath}/fileType/save.html">
+		<div class="modal-body">
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="id">ID:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="id"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="typename">档案类型:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="typename"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createTime">创建时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateTime">修改时间:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createUserid">创建人:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateUserid">修改人:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="status">状态:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="status"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="isDeleted">是否删除:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="isDeleted"  readonly="readonly"  />
+    			</div>
+            </div>
+    				</div>
+    	<div class="dlg-buttons">
+    		<button type="button" id="btnSaveFileType" onclick="submitFileType()" class="submit btn btn-primary">确认</button>
+    		<button type="button" id="backbtn" data-dismiss="modal" class="btn btn-info" >取消</button>
+    	</div>
+</form>
+</div>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.FileRoleMapper">
+	<resultMap id="BaseResultMap" type="com.crm.model.FileRole">
+					<id column="id" property="id" jdbcType="INTEGER" />
+								<result column="file_id" property="fileId" jdbcType="BIGINT" />
+								<result column="roleid" property="roleid" jdbcType="BIGINT" />
+								<result column="create_time" property="createTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+								<result column="create_userid" property="createUserid" jdbcType="INTEGER" />
+								<result column="update_userid" property="updateUserid" jdbcType="INTEGER" />
+								<result column="status" property="status" jdbcType="TINYINT" />
+								<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM t_file_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.crm.model.FileRole" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_file_role (
+			file_id,
+			roleid,
+			create_time,
+			update_time,
+			create_userid,
+			update_userid,
+			status
+		)
+		VALUES
+		(
+			#{fileId,jdbcType=BIGINT},
+			#{roleid,jdbcType=BIGINT},
+			#{createTime,jdbcType=BIGINT},
+			#{createTime,jdbcType=BIGINT},
+			#{createUserid,jdbcType=INTEGER},
+			#{createUserid,jdbcType=INTEGER},
+			#{status,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.crm.model.FileRole">
+		UPDATE t_file_role
+		SET
+			<if test="fileId!=null">file_id = #{fileId,jdbcType=BIGINT},</if>
+			<if test="roleid!=null">roleid = #{roleid,jdbcType=BIGINT},</if>
+			update_userid = #{updateUserid,jdbcType=INTEGER},
+			update_time = #{updateTime,jdbcType=BIGINT}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+	
+			
+	<update id="changeStatus">
+		UPDATE t_file_role
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            status=#{status,jdbcType=INTEGER}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+			
+	<update id="logicalDeleteByPrimaryKey">
+		UPDATE t_file_role
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            is_deleted=1
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+	<sql id="selectFields">
+	id,file_id,roleid,create_time,update_time,create_userid,update_userid,status,is_deleted
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_file_role
+	</select>
+	
+	<select id="queryFileRole" resultMap="BaseResultMap" parameterType="com.crm.model.FileRoleQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_file_role
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+								<if test="fileId!=null">AND file_id = #{fileId,jdbcType=BIGINT}</if>
+								<if test="roleid!=null">AND roleid = #{roleid,jdbcType=BIGINT}</if>
+								<if test="createTime!=null">AND create_time = #{createTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+								<if test="createUserid!=null">AND create_userid = #{createUserid,jdbcType=INTEGER}</if>
+								<if test="updateUserid!=null">AND update_userid = #{updateUserid,jdbcType=INTEGER}</if>
+								<if test="status!=null">AND status = #{status,jdbcType=TINYINT}</if>
+								<if test="isDeleted!=null">AND is_deleted = #{isDeleted,jdbcType=TINYINT}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_file_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_file_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

@@ -1,0 +1,294 @@
+<div class="row">
+	<form id="certificatePrintFormSearch">
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
+				<td>
+		<label for="printreason">打印理由:</label>
+	</td>
+	<td>
+		<input type="text" name="printreason" class="easyui-textbox" placeholder="打印理由">
+    </td>
+				<td>
+		<label for="certificateid">证照ID:</label>
+	</td>
+	<td>
+		<input type="text" name="certificateid" class="easyui-textbox" placeholder="证照ID">
+    </td>
+				<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+				<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+				<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="isDeleted">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchCertificatePrint()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
+	</form>
+</div>
+<div class="row">
+	<div id="certificatePrintTableToolBar">
+		<a href="#" onclick="showCertificatePrintDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+	</div>
+	<table id="certificatePrintTable">
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'printreason'">打印理由</th>
+			    			<th data-options="field:'certificateid'">证照ID</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status'">状态</th>
+			    			<th data-options="field:'isDeleted'">是否删除</th>
+						<th data-options="field:'action',formatter:certificatePrintActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="certificatePrintModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+	data-options="modal:true,buttons:'#certificatePrintDialogButtons',closed:true">
+	<div class="dialog-body">
+	<form id="certificatePrintForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="printreason">打印理由:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="printreason" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="certificateid">证照ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="certificateid" class="easyui-numberbox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDeleted">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+			   		</table>
+		<div id="certificatePrintDialogButtons">
+			<a href="#" id="btnSaveCertificatePrint" data-options="iconCls:'icon-save'" onclick="submitCertificatePrintForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeCertificatePrintDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+	var CERTIFICATEPRINT_API_BASE_URL = "${rc.contextPath}/certificatePrint/";
+	$(function() {
+		$('#certificatePrintTable').datagrid({
+			toolbar:'#certificatePrintTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小 
+			rownumbers : true, 
+			pageList : [ 20, 50, 100 ],
+			loader : certificatePrintTableLoader,
+			onDblClickRow : showCertificatePrintDialog
+		});
+	});
+
+	function certificatePrintTableLoader(param, success, error) {
+		
+		var queryParams = $('#certificatePrintFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : CERTIFICATEPRINT_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function certificatePrintActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='editCertificatePrint("+index+")' class=''>编辑</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='deleteCertificatePrint("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function editCertificatePrint(index) {
+		var certificatePrintTable = $("#certificatePrintTable");
+		var rows = certificatePrintTable.datagrid("getRows");
+		var row = rows[index];
+		showCertificatePrintDialog(index,row);
+	}
+	
+	function deleteCertificatePrint(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var certificatePrintTable = $("#certificatePrintTable");
+				var rows = certificatePrintTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(CERTIFICATEPRINT_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						certificatePrintTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchCertificatePrint() {
+		$('#certificatePrintTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showCertificatePrintDialog(rowIndex, rowData) {
+		var certificatePrintModal = $('#certificatePrintModal');
+		var certificatePrintForm = $('#certificatePrintForm');
+		if (rowData) {
+			certificatePrintModal.dialog({
+				title : "编辑应用"
+			});
+			certificatePrintForm.form('load', rowData);
+		} else {
+			certificatePrintModal.dialog({
+				title : "新增应用"
+			});
+			certificatePrintForm.form('clear');
+		}
+		certificatePrintModal.dialog("open");
+	}
+
+	function closeCertificatePrintDialog() {
+		$('#certificatePrintModal').dialog("close");
+	}
+
+	function submitCertificatePrintForm() {
+		var certificatePrintModal = $('#certificatePrintModal');
+		var certificatePrintTable = $("#certificatePrintTable");
+		var certificatePrintForm = $('#certificatePrintForm');
+		var isValid = certificatePrintForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = certificatePrintForm.serializeJson();
+        //数据处理和其他判断
+        $.post(CERTIFICATEPRINT_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = certificatePrintModal.dialog("options").title;
+                certificatePrintTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeCertificatePrintDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

@@ -1,0 +1,293 @@
+<div class="row">
+	<form id="autocodeFormSearch">
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
+				<td>
+		<label for="name">名称:</label>
+	</td>
+	<td>
+		<input type="text" name="name" class="easyui-textbox" placeholder="名称">
+    </td>
+				<td>
+		<label for="password">密码:</label>
+	</td>
+	<td>
+		<input type="text" name="password" class="easyui-textbox" placeholder="密码">
+    </td>
+				<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+				<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+				<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="isDelated">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDelated" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchAutocode()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
+	</form>
+</div>
+<div class="row">
+	<div id="autocodeTableToolBar">
+		<a href="#" onclick="showAutocodeDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+	</div>
+	<table id="autocodeTable">
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'name'">名称</th>
+			    			<th data-options="field:'password'">密码</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status',formatter:yesnoFormatter">状态</th>
+			    			<th data-options="field:'isDelated'">是否删除</th>
+						<th data-options="field:'action',formatter:autocodeActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="autocodeModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+	data-options="modal:true,buttons:'#autocodeDialogButtons',closed:true">
+	<div class="dialog-body">
+	<form id="autocodeForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="name">名称:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="name" class="easyui-textbox" data-options="validType:['length[0,64]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="password">密码:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="password" class="easyui-textbox" data-options="validType:['length[0,128]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDelated">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDelated" class="easyui-numberbox"    />
+                </td>
+            </tr>
+			   		</table>
+		<div id="autocodeDialogButtons">
+			<a href="#" id="btnSaveAutocode" data-options="iconCls:'icon-save'" onclick="submitAutocodeForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeAutocodeDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+	var AUTOCODE_API_BASE_URL = "${rc.contextPath}/autocode/";
+	$(function() {
+		$('#autocodeTable').datagrid({
+			toolbar:'#autocodeTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小  
+			pageList : [ 20, 50, 100 ],
+			loader : autocodeTableLoader,
+			onDblClickRow : showAutocodeDialog
+		});
+	});
+
+	function autocodeTableLoader(param, success, error) {
+		
+		var queryParams = $('#autocodeFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : AUTOCODE_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function autocodeActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='editAutocode("+index+")' class=''>编辑</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='deleteAutocode("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function editAutocode(index) {
+		var autocodeTable = $("#autocodeTable");
+		var rows = autocodeTable.datagrid("getRows");
+		var row = rows[index];
+		showAutocodeDialog(index,row);
+	}
+	
+	function deleteAutocode(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var autocodeTable = $("#autocodeTable");
+				var rows = autocodeTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(AUTOCODE_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						autocodeTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchAutocode() {
+		$('#autocodeTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showAutocodeDialog(rowIndex, rowData) {
+		var autocodeModal = $('#autocodeModal');
+		var autocodeForm = $('#autocodeForm');
+		if (rowData) {
+			autocodeModal.dialog({
+				title : "编辑应用"
+			});
+			autocodeForm.form('load', rowData);
+		} else {
+			autocodeModal.dialog({
+				title : "新增应用"
+			});
+			autocodeForm.form('clear');
+		}
+		autocodeModal.dialog("open");
+	}
+
+	function closeAutocodeDialog() {
+		$('#autocodeModal').dialog("close");
+	}
+
+	function submitAutocodeForm() {
+		var autocodeModal = $('#autocodeModal');
+		var autocodeTable = $("#autocodeTable");
+		var autocodeForm = $('#autocodeForm');
+		var isValid = autocodeForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = autocodeForm.serializeJson();
+        //数据处理和其他判断
+        $.post(AUTOCODE_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = autocodeModal.dialog("options").title;
+                autocodeTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeAutocodeDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.crm.model.Role">
+					<id column="id" property="id" jdbcType="INTEGER" />
+								<result column="rolename" property="rolename" jdbcType="VARCHAR" />
+								<result column="create_time" property="createTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+								<result column="create_userid" property="createUserid" jdbcType="INTEGER" />
+								<result column="update_userid" property="updateUserid" jdbcType="INTEGER" />
+								<result column="status" property="status" jdbcType="TINYINT" />
+								<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM t_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.crm.model.Role" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_role (
+			rolename,
+			create_time,
+			update_time,
+			create_userid,
+			update_userid,
+			status
+		)
+		VALUES
+		(
+			#{rolename,jdbcType=VARCHAR},
+			#{createTime,jdbcType=BIGINT},
+			#{createTime,jdbcType=BIGINT},
+			#{createUserid,jdbcType=INTEGER},
+			#{createUserid,jdbcType=INTEGER},
+			#{status,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.crm.model.Role">
+		UPDATE t_role
+		SET
+			<if test="rolename!=null">rolename = #{rolename,jdbcType=VARCHAR},</if>
+			update_userid = #{updateUserid,jdbcType=INTEGER},
+			update_time = #{updateTime,jdbcType=BIGINT}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+	
+			
+	<update id="changeStatus">
+		UPDATE t_role
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            status=#{status,jdbcType=INTEGER}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+			
+	<update id="logicalDeleteByPrimaryKey">
+		UPDATE t_role
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            is_deleted=1
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+	<sql id="selectFields">
+	id,rolename,create_time,update_time,create_userid,update_userid,status,is_deleted
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_role
+	</select>
+	
+	<select id="queryRole" resultMap="BaseResultMap" parameterType="com.crm.model.RoleQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_role
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+								<if test="rolename!=null and rolename!=''">AND rolename = #{rolename,jdbcType=VARCHAR}</if>
+								<if test="createTime!=null">AND create_time = #{createTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+								<if test="createUserid!=null">AND create_userid = #{createUserid,jdbcType=INTEGER}</if>
+								<if test="updateUserid!=null">AND update_userid = #{updateUserid,jdbcType=INTEGER}</if>
+								<if test="status!=null">AND status = #{status,jdbcType=TINYINT}</if>
+								<if test="isDeleted!=null">AND is_deleted = #{isDeleted,jdbcType=TINYINT}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_role
+		WHERE id = #{id,jdbcType=INTEGER} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

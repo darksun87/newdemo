@@ -1,0 +1,10 @@
+#macro(includeJS $jsList)
+    #foreach($js in $jsList)
+<script src="$rc.contextPath/${js}"></script>
+    #end
+#end
+#macro(includeCSS $cssList)
+    #foreach($css in $cssList)
+<link href="$rc.contextPath/$css" rel="stylesheet" type="text/css" />
+    #end
+#end

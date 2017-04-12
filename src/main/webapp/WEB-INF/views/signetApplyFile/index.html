@@ -1,0 +1,309 @@
+<div class="row">
+	<form id="signetApplyFileFormSearch">
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
+				<td>
+		<label for="signetApplyid">印章申请ID:</label>
+	</td>
+	<td>
+		<input type="text" name="signetApplyid" class="easyui-textbox" placeholder="印章申请ID">
+    </td>
+				<td>
+		<label for="beforesignet">用印前文件:</label>
+	</td>
+	<td>
+		<input type="text" name="beforesignet" class="easyui-textbox" placeholder="用印前文件">
+    </td>
+				<td>
+		<label for="aftersignet">用印后文件:</label>
+	</td>
+	<td>
+		<input type="text" name="aftersignet" class="easyui-textbox" placeholder="用印后文件">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+				<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+				<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+				<td>
+		<label for="isDeleted">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchSignetApplyFile()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
+	</form>
+</div>
+<div class="row">
+	<div id="signetApplyFileTableToolBar">
+		<a href="#" onclick="showSignetApplyFileDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+	</div>
+	<table id="signetApplyFileTable">
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'signetApplyid'">印章申请ID</th>
+			    			<th data-options="field:'beforesignet'">用印前文件</th>
+			    			<th data-options="field:'aftersignet'">用印后文件</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status'">状态</th>
+			    			<th data-options="field:'isDeleted'">是否删除</th>
+						<th data-options="field:'action',formatter:signetApplyFileActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="signetApplyFileModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+	data-options="modal:true,buttons:'#signetApplyFileDialogButtons',closed:true">
+	<div class="dialog-body">
+	<form id="signetApplyFileForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="signetApplyid">印章申请ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="signetApplyid" class="easyui-numberbox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="beforesignet">用印前文件:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="beforesignet" class="easyui-textbox" data-options="validType:['length[0,2147483647]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="aftersignet">用印后文件:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="aftersignet" class="easyui-numberbox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDeleted">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+			   		</table>
+		<div id="signetApplyFileDialogButtons">
+			<a href="#" id="btnSaveSignetApplyFile" data-options="iconCls:'icon-save'" onclick="submitSignetApplyFileForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeSignetApplyFileDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+	var SIGNETAPPLYFILE_API_BASE_URL = "${rc.contextPath}/signetApplyFile/";
+	$(function() {
+		$('#signetApplyFileTable').datagrid({
+			toolbar:'#signetApplyFileTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小 
+			rownumbers : true, 
+			pageList : [ 20, 50, 100 ],
+			loader : signetApplyFileTableLoader,
+			onDblClickRow : showSignetApplyFileDialog
+		});
+	});
+
+	function signetApplyFileTableLoader(param, success, error) {
+		
+		var queryParams = $('#signetApplyFileFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : SIGNETAPPLYFILE_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function signetApplyFileActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='editSignetApplyFile("+index+")' class=''>编辑</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='deleteSignetApplyFile("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function editSignetApplyFile(index) {
+		var signetApplyFileTable = $("#signetApplyFileTable");
+		var rows = signetApplyFileTable.datagrid("getRows");
+		var row = rows[index];
+		showSignetApplyFileDialog(index,row);
+	}
+	
+	function deleteSignetApplyFile(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var signetApplyFileTable = $("#signetApplyFileTable");
+				var rows = signetApplyFileTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(SIGNETAPPLYFILE_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						signetApplyFileTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchSignetApplyFile() {
+		$('#signetApplyFileTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showSignetApplyFileDialog(rowIndex, rowData) {
+		var signetApplyFileModal = $('#signetApplyFileModal');
+		var signetApplyFileForm = $('#signetApplyFileForm');
+		if (rowData) {
+			signetApplyFileModal.dialog({
+				title : "编辑应用"
+			});
+			signetApplyFileForm.form('load', rowData);
+		} else {
+			signetApplyFileModal.dialog({
+				title : "新增应用"
+			});
+			signetApplyFileForm.form('clear');
+		}
+		signetApplyFileModal.dialog("open");
+	}
+
+	function closeSignetApplyFileDialog() {
+		$('#signetApplyFileModal').dialog("close");
+	}
+
+	function submitSignetApplyFileForm() {
+		var signetApplyFileModal = $('#signetApplyFileModal');
+		var signetApplyFileTable = $("#signetApplyFileTable");
+		var signetApplyFileForm = $('#signetApplyFileForm');
+		var isValid = signetApplyFileForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = signetApplyFileForm.serializeJson();
+        //数据处理和其他判断
+        $.post(SIGNETAPPLYFILE_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = signetApplyFileModal.dialog("options").title;
+                signetApplyFileTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeSignetApplyFileDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

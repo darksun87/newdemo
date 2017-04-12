@@ -1,0 +1,69 @@
+#set($layout="layout/adminLayout.html") 
+<div id="modalAutocode" 
+	class="easyui-dialog" 
+	title="My Dialog" 
+	style="width:400px;height:200px;" 
+	data-options="iconCls:'icon-save',modal:true,buttons:#dlg-buttons">
+	<form id="formAutocode" method="post" action="${rc.contextPath}/autocode/save.html">
+		<div class="modal-body">
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="id">id:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="id"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="name">name:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="name"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="password">password:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="password"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createTime">createTime:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateTime">updateTime:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateTime"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="createUserid">createUserid:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="createUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="updateUserid">updateUserid:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="updateUserid"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="status">status:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="status"  readonly="readonly"  />
+    			</div>
+            </div>
+    		    		<div class="form-group col-lg-6 ">
+    			<label for="isDelated">isDelated:</label>
+    			<div class="col-lg-8">
+    				<input type="text" name="isDelated"  />
+    			</div>
+            </div>
+    				</div>
+    	<div class="dlg-buttons">
+    		<button type="button" id="btnSaveAutocode" onclick="submitAutocode()" class="submit btn btn-primary">确认</button>
+    		<button type="button" id="backbtn" data-dismiss="modal" class="btn btn-info" >取消</button>
+    	</div>
+</form>
+</div>

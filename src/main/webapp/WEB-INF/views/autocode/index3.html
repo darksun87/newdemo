@@ -1,0 +1,167 @@
+#set($layout="layout/huiLayout.html") 
+<div class="page-container">
+	<!-- 搜索 -->
+	<div class="text-c"> <span class="select-box inline">
+		<select name="" class="select">
+			<option value="0">全部分类</option>
+			<option value="1">分类一</option>
+			<option value="2">分类二</option>
+		</select>
+		</span> 日期范围：
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;">
+		-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;">
+		<input type="text" name="" id="" placeholder=" 资讯名称" style="width:250px" class="input-text">
+		<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
+	</div>
+	
+	<!-- 按钮 -->
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<span class="l">
+			<a class="btn btn-primary radius" data-title="添加资讯" onclick="add('添加表单','form.htm')" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加-表单覆盖
+			</a>
+			<a class="btn btn-primary radius" data-title="添加资讯" onclick="addDiolog('添加表单','form.htm','','720')" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加-表单弹出
+			</a>
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
+			</a> 
+		</span> 
+		<span class="r">
+			共有数据：<strong>20</strong> 条
+		</span> 
+	</div>
+	<div class="mt-20">
+		<table id="autocodeTable">
+	        <thead>
+		        <tr>
+		   			<th data-options="field:'id'">id</th>
+		   				<th data-options="field:'name'">name</th>
+			   			<th data-options="field:'password'">password</th>
+			   			<th data-options="field:'createTime',formatter:dateFormatter">createTime</th>
+			   			<th data-options="field:'updateTime',formatter:dateFormatter">updateTime</th>
+			   			<th data-options="field:'createUserid'">createUserid</th>
+			   			<th data-options="field:'updateUserid'">updateUserid</th>
+			   			<th data-options="field:'status',formatter:yesnoFormatter">status</th>
+			   			<th data-options="field:'isDelated'">isDelated</th>
+					<th data-options="field:'action',formatter:autocodeActionFormatter">是否删除</th>
+		        </tr>
+	        </thead>
+	    </table>
+	</div>
+</div>
+<script>
+	var AUTOCODE_API_BASE_URL = "${rc.contextPath}/autocode/";
+	$(function() {
+		$('#autocodeTable').datagrid({
+			toolbar:'#autocodeTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小  
+			pageList : [ 20, 50, 100 ],
+			loader : autocodeTableLoader,
+			onDblClickRow : showAutocodeDialog
+		});
+	});
+
+	function autocodeTableLoader(param, success, error) {
+		
+		var queryParams = $('#autocodeFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : AUTOCODE_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function autocodeActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='deleteAutocode("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function deleteAutocode(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var autocodeTable = $("#autocodeTable");
+				var rows = autocodeTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(AUTOCODE_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						autocodeTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchAutocode() {
+		$('#autocodeTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showAutocodeDialog(rowIndex, rowData) {
+		var autocodeModal = $('#autocodeModal');
+		var autocodeForm = $('#autocodeForm');
+		if (rowData) {
+			autocodeModal.dialog({
+				title : "编辑应用"
+			});
+			autocodeForm.form('load', rowData);
+		} else {
+			autocodeModal.dialog({
+				title : "新增应用"
+			});
+			autocodeForm.form('clear');
+		}
+		autocodeModal.dialog("open");
+	}
+
+	function closeAutocodeDialog() {
+		$('#autocodeModal').dialog("close");
+	}
+
+	function submitAutocodeForm() {
+		var autocodeModal = $('#autocodeModal');
+		var autocodeTable = $("#autocodeTable");
+		var autocodeForm = $('#autocodeForm');
+		var isValid = autocodeForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = autocodeForm.serializeJson();
+        //数据处理和其他判断
+        $.post(AUTOCODE_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = autocodeModal.dialog("options").title;
+                autocodeTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeAutocodeDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

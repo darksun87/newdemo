@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>$!page_title</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet" href="${rc.contextPath}/static/easyui/themes/custom/easyui.css">
+<link rel="stylesheet" href="${rc.contextPath}/static/easyui/themes/icon.css">
+<link rel="stylesheet" href="${rc.contextPath}/static/easyui/themes/color.css">
+<link rel="stylesheet" href="${rc.contextPath}/static/upload/uploadify.css">
+<link rel="stylesheet" href="${rc.contextPath}/static/gms/common.css">
+<link rel="stylesheet" href="${rc.contextPath}/static/common/container.css">
+#includeCSS($cssList)
+
+<script src="${rc.contextPath}/static/easyui/jquery.min.js"></script>
+<script src="${rc.contextPath}/static/easyui/jquery.easyui.min.js"></script>
+<script src="${rc.contextPath}/static/easyui/easyui-lang-zh_CN.js"></script>
+<script src="${rc.contextPath}/static/upload/jquery.uploadify.min.js"></script>
+<script src="${rc.contextPath}/static/gms/common.js"></script>
+#includeJS($jsList)
+</head>
+<body class="easyui-layout">
+	<div style="padding:10px;">
+		$screen_content
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<div class="row">
+	<form id="travelFormSearch">
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
+				<td>
+		<label for="reason">出差原因:</label>
+	</td>
+	<td>
+		<input type="text" name="reason" class="easyui-textbox" placeholder="出差原因">
+    </td>
+				<td>
+		<label for="destation">目的地:</label>
+	</td>
+	<td>
+		<input type="text" name="destation" class="easyui-textbox" placeholder="目的地">
+    </td>
+				<td>
+		<label for="startTime">开始时间:</label>
+	</td>
+	<td>
+		<input type="text" name="startTime" class="easyui-datetimebox" placeholder="开始时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="endTime">实际结束时间:</label>
+	</td>
+	<td>
+		<input type="text" name="endTime" class="easyui-datetimebox" placeholder="实际结束时间">
+    </td>
+				<td>
+		<label for="expectendTime">预计结束时间:</label>
+	</td>
+	<td>
+		<input type="text" name="expectendTime" class="easyui-datetimebox" placeholder="预计结束时间">
+    </td>
+				<td>
+		<label for="expectcost">预计花费:</label>
+	</td>
+	<td>
+		<input type="text" name="expectcost" class="easyui-textbox" placeholder="预计花费">
+    </td>
+				<td>
+		<label for="cost">实际花费:</label>
+	</td>
+	<td>
+		<input type="text" name="cost" class="easyui-textbox" placeholder="实际花费">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="gmTime">总经理审批时间:</label>
+	</td>
+	<td>
+		<input type="text" name="gmTime" class="easyui-datetimebox" placeholder="总经理审批时间">
+    </td>
+				<td>
+		<label for="gmResult">总经理审批结果:</label>
+	</td>
+	<td>
+		<input type="text" name="gmResult" class="easyui-textbox" placeholder="总经理审批结果">
+    </td>
+				<td>
+		<label for="gmSuggest">总经理审批意见:</label>
+	</td>
+	<td>
+		<input type="text" name="gmSuggest" class="easyui-textbox" placeholder="总经理审批意见">
+    </td>
+				<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+				<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+				<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="isDeleted">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchTravel()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
+	</form>
+</div>
+<div class="row">
+	<div id="travelTableToolBar">
+		<a href="#" onclick="showTravelDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+	</div>
+	<table id="travelTable">
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'reason'">出差原因</th>
+			    			<th data-options="field:'destation'">目的地</th>
+			    			<th data-options="field:'startTime',formatter:dateFormatter">开始时间</th>
+			    			<th data-options="field:'endTime',formatter:dateFormatter">实际结束时间</th>
+			    			<th data-options="field:'expectendTime',formatter:dateFormatter">预计结束时间</th>
+			    			<th data-options="field:'expectcost'">预计花费</th>
+			    			<th data-options="field:'cost'">实际花费</th>
+			    			<th data-options="field:'gmTime',formatter:dateFormatter">总经理审批时间</th>
+			    			<th data-options="field:'gmResult'">总经理审批结果</th>
+			    			<th data-options="field:'gmSuggest'">总经理审批意见</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status'">状态</th>
+			    			<th data-options="field:'isDeleted'">是否删除</th>
+						<th data-options="field:'action',formatter:travelActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="travelModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+	data-options="modal:true,buttons:'#travelDialogButtons',closed:true">
+	<div class="dialog-body">
+	<form id="travelForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="reason">出差原因:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="reason" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="destation">目的地:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="destation" class="easyui-textbox" data-options="validType:['length[0,20]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="startTime">开始时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="startTime" class="easyui-datetimebox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="endTime">实际结束时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="endTime" class="easyui-datetimebox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="expectendTime">预计结束时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="expectendTime" class="easyui-datetimebox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="expectcost">预计花费:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="expectcost" class="easyui-textbox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="cost">实际花费:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="cost" class="easyui-textbox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="gmTime">总经理审批时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="gmTime" class="easyui-datetimebox"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="gmResult">总经理审批结果:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="gmResult" class="easyui-textbox" data-options="validType:['length[0,10]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="gmSuggest">总经理审批意见:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="gmSuggest" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDeleted">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+			   		</table>
+		<div id="travelDialogButtons">
+			<a href="#" id="btnSaveTravel" data-options="iconCls:'icon-save'" onclick="submitTravelForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeTravelDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+	var TRAVEL_API_BASE_URL = "${rc.contextPath}/travel/";
+	$(function() {
+		$('#travelTable').datagrid({
+			toolbar:'#travelTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小 
+			rownumbers : true, 
+			pageList : [ 20, 50, 100 ],
+			loader : travelTableLoader,
+			onDblClickRow : showTravelDialog
+		});
+	});
+
+	function travelTableLoader(param, success, error) {
+		
+		var queryParams = $('#travelFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : TRAVEL_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function travelActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='editTravel("+index+")' class=''>编辑</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='deleteTravel("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function editTravel(index) {
+		var travelTable = $("#travelTable");
+		var rows = travelTable.datagrid("getRows");
+		var row = rows[index];
+		showTravelDialog(index,row);
+	}
+	
+	function deleteTravel(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var travelTable = $("#travelTable");
+				var rows = travelTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(TRAVEL_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						travelTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchTravel() {
+		$('#travelTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showTravelDialog(rowIndex, rowData) {
+		var travelModal = $('#travelModal');
+		var travelForm = $('#travelForm');
+		if (rowData) {
+			travelModal.dialog({
+				title : "编辑应用"
+			});
+			travelForm.form('load', rowData);
+		} else {
+			travelModal.dialog({
+				title : "新增应用"
+			});
+			travelForm.form('clear');
+		}
+		travelModal.dialog("open");
+	}
+
+	function closeTravelDialog() {
+		$('#travelModal').dialog("close");
+	}
+
+	function submitTravelForm() {
+		var travelModal = $('#travelModal');
+		var travelTable = $("#travelTable");
+		var travelForm = $('#travelForm');
+		var isValid = travelForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = travelForm.serializeJson();
+        //数据处理和其他判断
+        $.post(TRAVEL_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = travelModal.dialog("options").title;
+                travelTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeTravelDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

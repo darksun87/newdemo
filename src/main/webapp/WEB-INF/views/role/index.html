@@ -1,0 +1,279 @@
+<div class="row">
+	<form id="roleFormSearch">
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
+				<td>
+		<label for="rolename">角色名称:</label>
+	</td>
+	<td>
+		<input type="text" name="rolename" class="easyui-textbox" placeholder="角色名称">
+    </td>
+				<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+				<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+				<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+				<td>
+		<label for="isDeleted">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchRole()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
+	</form>
+</div>
+<div class="row">
+	<div id="roleTableToolBar">
+		<a href="#" onclick="showRoleDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+	</div>
+	<table id="roleTable">
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'rolename'">角色名称</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status'">状态</th>
+			    			<th data-options="field:'isDeleted'">是否删除</th>
+						<th data-options="field:'action',formatter:roleActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="roleModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+	data-options="modal:true,buttons:'#roleDialogButtons',closed:true">
+	<div class="dialog-body">
+	<form id="roleForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="rolename">角色名称:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="rolename" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDeleted">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+			   		</table>
+		<div id="roleDialogButtons">
+			<a href="#" id="btnSaveRole" data-options="iconCls:'icon-save'" onclick="submitRoleForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeRoleDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+	var ROLE_API_BASE_URL = "${rc.contextPath}/role/";
+	$(function() {
+		$('#roleTable').datagrid({
+			toolbar:'#roleTableToolBar',
+			pagination : true,//显示分页  
+			pageSize : 20,//分页大小 
+			rownumbers : true, 
+			pageList : [ 20, 50, 100 ],
+			loader : roleTableLoader,
+			onDblClickRow : showRoleDialog
+		});
+	});
+
+	function roleTableLoader(param, success, error) {
+		
+		var queryParams = $('#roleFormSearch').serializeJson();
+		queryParams.pageIndex = param.page;
+		queryParams.pageSize = param.rows;
+		$.ajax({
+			type : "post",
+			url : ROLE_API_BASE_URL + "query.html",
+			data : queryParams,
+			dataType : "json",
+			success : function(res) {
+				var result = {};
+				result.total = res.total;
+				result.rows =  res.records;
+				success(result);
+			},
+			error : function() {
+				error.apply(this, arguments);
+			}
+		});
+	}
+
+
+	function roleActionFormatter(value,row,index){
+		return [
+				"<a href='javascript:' onclick='editRole("+index+")' class=''>编辑</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='deleteRole("+index+")' class=''>删除</a>"
+				].join("");
+	}
+	
+	function editRole(index) {
+		var roleTable = $("#roleTable");
+		var rows = roleTable.datagrid("getRows");
+		var row = rows[index];
+		showRoleDialog(index,row);
+	}
+	
+	function deleteRole(index) {
+		$.messager.confirm('确认', '你确认删除？', function(r) {
+			if (r) {
+				var roleTable = $("#roleTable");
+				var rows = roleTable.datagrid("getRows");
+				var row = rows[index];
+				$.post(ROLE_API_BASE_URL + "delete.html", {
+					id : row.id
+				}, function(res) {
+					if(res.status==10000){
+						$.messager.alert("成功","删除成功","info");
+						roleTable.datagrid("reload");
+					}
+					else{
+						$.messager.alert("失败",res.message,"error");
+					}
+				});
+			}
+		});
+	}
+	
+	function searchRole() {
+		$('#roleTable').datagrid("getPager").pagination("select",1);
+	}
+
+	function showRoleDialog(rowIndex, rowData) {
+		var roleModal = $('#roleModal');
+		var roleForm = $('#roleForm');
+		if (rowData) {
+			roleModal.dialog({
+				title : "编辑应用"
+			});
+			roleForm.form('load', rowData);
+		} else {
+			roleModal.dialog({
+				title : "新增应用"
+			});
+			roleForm.form('clear');
+		}
+		roleModal.dialog("open");
+	}
+
+	function closeRoleDialog() {
+		$('#roleModal').dialog("close");
+	}
+
+	function submitRoleForm() {
+		var roleModal = $('#roleModal');
+		var roleTable = $("#roleTable");
+		var roleForm = $('#roleForm');
+		var isValid = roleForm.form('validate');
+        if (!isValid) {
+            $.messager.alert("验证失败", "请修正输入项再试", "warning");
+            return;
+        }
+		
+        var jsonData = roleForm.serializeJson();
+        //数据处理和其他判断
+        $.post(ROLE_API_BASE_URL + "save.html", jsonData,
+        function(res) {
+            if (res.status == 10000) {
+                var title = roleModal.dialog("options").title;
+                roleTable.datagrid("reload");
+                $.messager.alert("成功", title + "成功", "info");
+				closeRoleDialog();
+            } else {
+                $.messager.alert(title+"失败", res.message, "error");
+            }
+        });
+	}
+</script>
+

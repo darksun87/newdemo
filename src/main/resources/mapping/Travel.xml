@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.TravelMapper">
+	<resultMap id="BaseResultMap" type="com.crm.model.Travel">
+					<id column="id" property="id" jdbcType="INTEGER" />
+								<result column="reason" property="reason" jdbcType="VARCHAR" />
+								<result column="destation" property="destation" jdbcType="VARCHAR" />
+								<result column="start_time" property="startTime" jdbcType="BIGINT" />
+								<result column="end_time" property="endTime" jdbcType="BIGINT" />
+								<result column="expectend_time" property="expectendTime" jdbcType="BIGINT" />
+								<result column="expectcost" property="expectcost" jdbcType="FLOAT" />
+								<result column="cost" property="cost" jdbcType="FLOAT" />
+								<result column="gm_time" property="gmTime" jdbcType="BIGINT" />
+								<result column="gm_result" property="gmResult" jdbcType="VARCHAR" />
+								<result column="gm_suggest" property="gmSuggest" jdbcType="VARCHAR" />
+								<result column="create_time" property="createTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+								<result column="create_userid" property="createUserid" jdbcType="INTEGER" />
+								<result column="update_userid" property="updateUserid" jdbcType="INTEGER" />
+								<result column="status" property="status" jdbcType="TINYINT" />
+								<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM t_travel
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.crm.model.Travel" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO t_travel (
+			reason,
+			destation,
+			start_time,
+			end_time,
+			expectend_time,
+			expectcost,
+			cost,
+			gm_time,
+			gm_result,
+			gm_suggest,
+			create_time,
+			update_time,
+			create_userid,
+			update_userid,
+			status
+		)
+		VALUES
+		(
+			#{reason,jdbcType=VARCHAR},
+			#{destation,jdbcType=VARCHAR},
+			#{startTime,jdbcType=BIGINT},
+			#{endTime,jdbcType=BIGINT},
+			#{expectendTime,jdbcType=BIGINT},
+			#{expectcost,jdbcType=FLOAT},
+			#{cost,jdbcType=FLOAT},
+			#{gmTime,jdbcType=BIGINT},
+			#{gmResult,jdbcType=VARCHAR},
+			#{gmSuggest,jdbcType=VARCHAR},
+			#{createTime,jdbcType=BIGINT},
+			#{createTime,jdbcType=BIGINT},
+			#{createUserid,jdbcType=INTEGER},
+			#{createUserid,jdbcType=INTEGER},
+			#{status,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.crm.model.Travel">
+		UPDATE t_travel
+		SET
+			<if test="reason!=null">reason = #{reason,jdbcType=VARCHAR},</if>
+			<if test="destation!=null">destation = #{destation,jdbcType=VARCHAR},</if>
+			<if test="gmResult!=null">gm_result = #{gmResult,jdbcType=VARCHAR},</if>
+			<if test="gmSuggest!=null">gm_suggest = #{gmSuggest,jdbcType=VARCHAR},</if>
+			<if test="startTime!=null">start_time = #{startTime,jdbcType=BIGINT},</if>
+			<if test="endTime!=null">end_time = #{endTime,jdbcType=BIGINT},</if>
+			<if test="expectendTime!=null">expectend_time = #{expectendTime,jdbcType=BIGINT},</if>
+			<if test="expectcost!=null">expectcost = #{expectcost,jdbcType=FLOAT},</if>
+			<if test="cost!=null">cost = #{cost,jdbcType=FLOAT},</if>
+			<if test="gmTime!=null">gm_time = #{gmTime,jdbcType=BIGINT},</if>
+			update_userid = #{updateUserid,jdbcType=INTEGER},
+			update_time = #{updateTime,jdbcType=BIGINT}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+	
+			
+	<update id="changeStatus">
+		UPDATE t_travel
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            status=#{status,jdbcType=INTEGER}
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+			
+	<update id="logicalDeleteByPrimaryKey">
+		UPDATE t_travel
+		SET
+    		update_time=#{updateTime,jdbcType=BIGINT},
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            is_deleted=1
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+		
+	<sql id="selectFields">
+	id,reason,destation,start_time,end_time,expectend_time,expectcost,cost,gm_time,gm_result,gm_suggest,create_time,update_time,create_userid,update_userid,status,is_deleted
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_travel
+	</select>
+	
+	<select id="queryTravel" resultMap="BaseResultMap" parameterType="com.crm.model.TravelQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_travel
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+								<if test="reason!=null and reason!=''">AND reason = #{reason,jdbcType=VARCHAR}</if>
+								<if test="destation!=null and destation!=''">AND destation = #{destation,jdbcType=VARCHAR}</if>
+								<if test="startTime!=null">AND start_time = #{startTime,jdbcType=BIGINT}</if>
+								<if test="endTime!=null">AND end_time = #{endTime,jdbcType=BIGINT}</if>
+								<if test="expectendTime!=null">AND expectend_time = #{expectendTime,jdbcType=BIGINT}</if>
+								<if test="expectcost!=null">AND expectcost = #{expectcost,jdbcType=FLOAT}</if>
+								<if test="cost!=null">AND cost = #{cost,jdbcType=FLOAT}</if>
+								<if test="gmTime!=null">AND gm_time = #{gmTime,jdbcType=BIGINT}</if>
+								<if test="gmResult!=null and gmResult!=''">AND gm_result = #{gmResult,jdbcType=VARCHAR}</if>
+								<if test="gmSuggest!=null and gmSuggest!=''">AND gm_suggest = #{gmSuggest,jdbcType=VARCHAR}</if>
+								<if test="createTime!=null">AND create_time = #{createTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+								<if test="createUserid!=null">AND create_userid = #{createUserid,jdbcType=INTEGER}</if>
+								<if test="updateUserid!=null">AND update_userid = #{updateUserid,jdbcType=INTEGER}</if>
+								<if test="status!=null">AND status = #{status,jdbcType=TINYINT}</if>
+								<if test="isDeleted!=null">AND is_deleted = #{isDeleted,jdbcType=TINYINT}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_travel
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_travel
+		WHERE id = #{id,jdbcType=INTEGER} 
+		FOR UPDATE
+	</select>
+		
+</mapper>
