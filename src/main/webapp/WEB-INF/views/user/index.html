@@ -1,201 +1,100 @@
 <div class="row">
 	<form id="userFormSearch">
-	<table class="formtable">
-		<tr>
-		<td>
-		<label for="id">ID:</label>
-	</td>
-	<td>
-		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
-    </td>
+		<table class="formtable">
+			<tr>
+				<td><label for="realname">真实姓名:</label></td>
+				<td><input type="text" name="realname" class="easyui-textbox"
+					placeholder="真实姓名"></td>
+				<td><label for="departmentid">部门:</label></td>
 				<td>
-		<label for="realname">真实姓名:</label>
-	</td>
-	<td>
-		<input type="text" name="realname" class="easyui-textbox" placeholder="真实姓名">
-    </td>
+					<select name="departmentid" class="easyui-combobox" style="width:173px;">
+					<option value="-1">全部</option>
+					#foreach($department in $departments)
+						<option value="${department.id}">${department.departmentname}</option>
+					#end
+					</select>
+				</td>
+				<td><label for="loginname">登录名:</label></td>
+				<td><input type="text" name="loginname" class="easyui-textbox"
+					placeholder="登录名"></td>
 				<td>
-		<label for="departmentid">部门:</label>
-	</td>
-	<td>
-		<input type="text" name="departmentid" class="easyui-textbox" placeholder="部门">
-    </td>
-				<td>
-		<label for="loginname">登录名:</label>
-	</td>
-	<td>
-		<input type="text" name="loginname" class="easyui-textbox" placeholder="登录名">
-    </td>
-	</tr>	<tr>		<td>
-		<label for="password">密码:</label>
-	</td>
-	<td>
-		<input type="text" name="password" class="easyui-textbox" placeholder="密码">
-    </td>
-				<td>
-		<label for="createTime">创建时间:</label>
-	</td>
-	<td>
-		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
-    </td>
-				<td>
-		<label for="updateTime">修改时间:</label>
-	</td>
-	<td>
-		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
-    </td>
-				<td>
-		<label for="createUserid">创建人:</label>
-	</td>
-	<td>
-		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
-    </td>
-	</tr>	<tr>		<td>
-		<label for="updateUserid">修改人:</label>
-	</td>
-	<td>
-		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
-    </td>
-				<td>
-		<label for="status">状态:</label>
-	</td>
-	<td>
-		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
-    </td>
-				<td>
-		<label for="isDeleted">是否删除:</label>
-	</td>
-	<td>
-		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
-    </td>
-	</tr>			</table>
-	<div>
-		<a href="#" onclick="searchUser()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
-	</div>
+					<div>
+						<a href="#" onclick="searchUser()" class="easyui-linkbutton"
+							data-options="iconCls:'icon-search'">搜索</a>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
 <div class="row">
 	<div id="userTableToolBar">
-		<a href="#" onclick="showUserDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+		<a href="#" onclick="showUserDialog()" class="easyui-linkbutton"
+			data-options="iconCls:'icon-edit',plain:true">新增</a>
 	</div>
 	<table id="userTable">
-        <thead>
-        <tr>
-    		    			<th data-options="field:'id'">ID</th>
-			    			<th data-options="field:'realname'">真实姓名</th>
-			    			<th data-options="field:'departmentid'">部门</th>
-			    			<th data-options="field:'loginname'">登录名</th>
-			    			<th data-options="field:'password'">密码</th>
-			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
-			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
-			    			<th data-options="field:'createUserid'">创建人</th>
-			    			<th data-options="field:'updateUserid'">修改人</th>
-			    			<th data-options="field:'status'">状态</th>
-			    			<th data-options="field:'isDeleted'">是否删除</th>
-						<th data-options="field:'action',formatter:userActionFormatter">操作</th>
-        </tr>
-        </thead>
-    </table>
+		<thead>
+			<tr>
+				<th data-options="field:'id'">ID</th>
+				<th data-options="field:'realname'">真实姓名</th>
+				<th data-options="field:'departmentname'">部门</th>
+				<th data-options="field:'loginname'">登录名</th>
+				<th data-options="field:'password'">密码</th>
+				<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+				<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+				<th data-options="field:'createUserid'">创建人</th>
+				<th data-options="field:'updateUserid'">修改人</th>
+				<th data-options="field:'status'">状态</th>
+				<th data-options="field:'isDeleted'">是否删除</th>
+				<th data-options="field:'action',formatter:userActionFormatter">操作</th>
+			</tr>
+		</thead>
+	</table>
 </div>
-<div id="userModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+<div id="userModal" class="easyui-dialog" title="My Dialog"
+	style="padding:30px;"
 	data-options="modal:true,buttons:'#userDialogButtons',closed:true">
 	<div class="dialog-body">
-	<form id="userForm" method="post">
-		<table class="formtable">
-						<tr>
-            	<td>
-            		<label for="id">ID:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="realname">真实姓名:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="realname" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="departmentid">部门:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="departmentid" class="easyui-numberbox"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="loginname">登录名:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="loginname" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="password">密码:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="password" class="easyui-textbox" data-options="validType:['length[0,128]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="createTime">创建时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="updateTime">修改时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="createUserid">创建人:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="updateUserid">修改人:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="status">状态:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="isDeleted">是否删除:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-			   		</table>
-		<div id="userDialogButtons">
-			<a href="#" id="btnSaveUser" data-options="iconCls:'icon-save'" onclick="submitUserForm()" class="easyui-linkbutton">确认</a>  
-			<a href="#" id="backbtn" onclick="closeUserDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
-		</div>
-	</form>
+		<form id="userForm" method="post">
+			<table class="formtable">
+				<tr>
+					<td><label for="id">ID:</label></td>
+					<td><input type="text" name="id" class="easyui-textbox"
+						editable="false" /></td>
+				</tr>
+				<tr>
+					<td><label for="realname">真实姓名:</label></td>
+					<td><input type="text" name="realname" class="easyui-textbox"
+						data-options="validType:['length[0,100]']" /></td>
+				</tr>
+				<tr>
+					<td><label for="departmentid">部门:</label></td>
+					<td>
+						<select name="departmentid" class="easyui-combobox" style="width:173px;">
+						#foreach($department in $departments)
+							<option value="${department.id}">${department.departmentname}</option>
+						#end
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label for="loginname">登录名:</label></td>
+					<td><input type="text" name="loginname" class="easyui-textbox"
+						data-options="validType:['length[0,100]']" /></td>
+				</tr>
+				<tr>
+					<td><label for="password">密码:</label></td>
+					<td><input type="text" name="password" class="easyui-textbox"
+						data-options="validType:['length[0,128]']" /></td>
+				</tr>
+			</table>
+			<div id="userDialogButtons">
+				<a href="#" id="btnSaveUser" data-options="iconCls:'icon-save'"
+					onclick="submitUserForm()" class="easyui-linkbutton">确认</a> <a
+					href="#" id="backbtn" onclick="closeUserDialog()"
+					class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+			</div>
+		</form>
 	</div>
 </div>
 <script>
@@ -280,12 +179,12 @@
 		var userForm = $('#userForm');
 		if (rowData) {
 			userModal.dialog({
-				title : "编辑应用"
+				title : "编辑"
 			});
 			userForm.form('load', rowData);
 		} else {
 			userModal.dialog({
-				title : "新增应用"
+				title : "新增"
 			});
 			userForm.form('clear');
 		}
