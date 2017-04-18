@@ -92,7 +92,20 @@
 		FROM t_user t
 		<include refid="joinDepartment" />	
 	</select>
-	
+	<select id="checkUser" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_user t
+		<include refid="joinDepartment" />			
+		WHERE t.loginname = #{loginname,jdbcType=VARCHAR} and t.password =  #{password,jdbcType=VARCHAR}
+	</select>
+	<select id="getUserByLoginname" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM t_user t
+		<include refid="joinDepartment" />			
+		WHERE t.loginname = #{loginname,jdbcType=VARCHAR}
+	</select>
 	<select id="queryUser" resultMap="BaseResultMap" parameterType="com.crm.model.UserQuery">
 		SELECT
 		<include refid="selectFields" />

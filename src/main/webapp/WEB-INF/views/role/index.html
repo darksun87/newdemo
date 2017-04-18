@@ -62,8 +62,22 @@
 		</form>
 	</div>
 </div>
+<div id="resourceModal" class="easyui-dialog" title="编辑权限"
+	style="padding:30px;width:300px;"
+	data-options="modal:true,buttons:'#resourceDialogButtons',closed:true">
+	<div class="dialog-body">
+			<ul id="resourceTree" class="ztree"></ul>
+		<div id="resourceDialogButtons">
+			<a href="#" id="btnSaveResource" data-options="iconCls:'icon-save'"
+				onclick="saveRolePermission()" class="easyui-linkbutton">确认</a> <a
+				href="#" id="backbtn" onclick="closeResourceDialog()"
+				class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</div>
+</div>
 <script>
 	var ROLE_API_BASE_URL = "${rc.contextPath}/role/";
+	var PERMISSION_API_BASE_URL = "${rc.contextPath}/rolePermission/";
 	$(function() {
 		$('#roleTable').datagrid({
 			toolbar:'#roleTableToolBar',
@@ -74,6 +88,27 @@
 			loader : roleTableLoader,
 			onDblClickRow : showRoleDialog
 		});
+		var setting = {
+				check: {
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				}
+			};
+
+		var zNodes =[];
+		#foreach($menu_lv1 in $menu)
+			var node = {id:${menu_lv1.id},pId:${menu_lv1.pid}, name:"${menu_lv1.name}", open:true};
+			zNodes.push(node);
+			#foreach($menu_lv2 in $menu_lv1.childResources)
+				var childnode = {id:${menu_lv2.id},pId:${menu_lv2.pid}, name:"${menu_lv2.name}", open:true};
+				zNodes.push(childnode);
+			#end
+		#end
+		ztree =$.fn.zTree.init($("#resourceTree"), setting, zNodes);
 	});
 
 	function roleTableLoader(param, success, error) {
@@ -103,7 +138,9 @@
 		return [
 				"<a href='javascript:' onclick='editRole("+index+")' class=''>编辑</a>",
 				"<span> </span>",
-				"<a href='javascript:' onclick='deleteRole("+index+")' class=''>删除</a>"
+				"<a href='javascript:' onclick='deleteRole("+index+")' class=''>删除</a>",
+				"<span> </span>",
+				"<a href='javascript:' onclick='editResource("+index+")' class=''>设置权限</a>"
 				].join("");
 	}
 	
@@ -134,6 +171,19 @@
 			}
 		});
 	}
+	function editResource(index) {
+		var userTable = $("#roleTable");
+		var rows = userTable.datagrid("getRows");
+		var row = rows[index];
+		showResourceDialog(index,row);
+	}
+	function showResourceDialog(rowIndex, rowData) {
+		var resourceModal = $('#resourceModal');
+		resourceModal.dialog({
+			title : "编辑权限("+rowData.id+")"
+		});
+		resourceModal.dialog("open");
+	}
 	
 	function searchRole() {
 		$('#roleTable').datagrid("getPager").pagination("select",1);
@@ -144,18 +194,37 @@
 		var roleForm = $('#roleForm');
 		if (rowData) {
 			roleModal.dialog({
-				title : "编辑应用"
+				title : "编辑角色"
 			});
 			roleForm.form('load', rowData);
 		} else {
 			roleModal.dialog({
-				title : "新增应用"
+				title : "新增角色"
 			});
 			roleForm.form('clear');
 		}
 		roleModal.dialog("open");
 	}
 
+	function closeResourceDialog() {
+		$('#resourceModal').dialog("close");
+	}
+	function saveRolePermission() {
+		var resourceModal = $('#resourceModal');
+        var title = resourceModal.dialog("options").title;
+        var roleid = title.substring(title.indexOf("(")+1,title.indexOf(")"));
+		var jsonData = {"resourceids":[],"roleid":parseInt(roleid)};
+	    //数据处理和其他判断
+	    $.post(PERMISSION_API_BASE_URL + "saveByRoleid.html", jsonData,
+	    function(res) {
+	        if (res.status == 10000) {
+	            $.messager.alert("成功", title + "成功", "info");
+	            closeResourceDialog();
+	        } else {
+	            $.messager.alert(title+"失败", res.message, "error");
+	        }
+	    });
+	}
 	function closeRoleDialog() {
 		$('#roleModal').dialog("close");
 	}
