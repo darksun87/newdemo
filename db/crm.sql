@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-04-17 18:49:12
+Date: 2017-04-19 10:27:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,14 +71,14 @@ CREATE TABLE `resource` (
   `level` int(10) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
 INSERT INTO `resource` VALUES ('1', '系统', null, null, '0', '5', '1', null);
-INSERT INTO `resource` VALUES ('2', '用户管理', null, null, '1', '1', '2', 'user/index.html');
-INSERT INTO `resource` VALUES ('3', '角色管理', null, null, '1', '2', '2', 'role/index.html');
+INSERT INTO `resource` VALUES ('2', '用户管理', null, null, '1', '2', '2', 'user/index.html');
+INSERT INTO `resource` VALUES ('3', '角色管理', null, null, '1', '3', '2', 'role/index.html');
 INSERT INTO `resource` VALUES ('4', '档案管理', null, null, '0', '4', '1', 'file/index.html');
 INSERT INTO `resource` VALUES ('5', '用印管理', null, null, '0', '1', '1', '');
 INSERT INTO `resource` VALUES ('6', '证照管理', null, null, '0', '2', '1', '');
@@ -87,6 +87,7 @@ INSERT INTO `resource` VALUES ('8', '印章管理', null, null, '5', '1', '2', '
 INSERT INTO `resource` VALUES ('26', '用印申请', null, null, '5', '2', '2', 'signetApply/index.html');
 INSERT INTO `resource` VALUES ('27', '证照管理', null, null, '6', '1', '2', 'certificate/index.html');
 INSERT INTO `resource` VALUES ('28', '用证申请', null, null, '6', '2', '2', 'certificateApply/index.html');
+INSERT INTO `resource` VALUES ('29', '部门管理', null, null, '1', '1', '2', 'department/index.html');
 
 -- ----------------------------
 -- Table structure for t_certificate
@@ -171,11 +172,16 @@ CREATE TABLE `t_department` (
   `status` tinyint(4) DEFAULT NULL COMMENT '状态',
   `is_deleted` tinyint(4) DEFAULT NULL COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of t_department
 -- ----------------------------
+INSERT INTO `t_department` VALUES ('1', '业务部', '1492436433531', '1492436433531', '1', '1', null, null);
+INSERT INTO `t_department` VALUES ('2', '行政人事部', '1492436446985', '1492436446985', '1', '1', null, null);
+INSERT INTO `t_department` VALUES ('3', '副总经理', '1492436454243', '1492436454243', '1', '1', null, null);
+INSERT INTO `t_department` VALUES ('4', '总经理', '1492436461074', '1492436461074', '1', '1', null, null);
+INSERT INTO `t_department` VALUES ('5', '财务部', '1492436485121', '1492436485121', '1', '1', null, null);
 
 -- ----------------------------
 -- Table structure for t_file
@@ -277,11 +283,12 @@ CREATE TABLE `t_role` (
   `status` tinyint(4) DEFAULT NULL COMMENT '状态',
   `is_deleted` tinyint(4) DEFAULT NULL COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色管理';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色管理';
 
 -- ----------------------------
 -- Records of t_role
 -- ----------------------------
+INSERT INTO `t_role` VALUES ('1', '管理员', '1492438785271', '1492438795610', '1', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for t_role_permission
@@ -289,8 +296,8 @@ CREATE TABLE `t_role` (
 DROP TABLE IF EXISTS `t_role_permission`;
 CREATE TABLE `t_role_permission` (
   `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `roleid` bigint(20) DEFAULT NULL COMMENT '角色',
-  `url` varchar(100) DEFAULT NULL COMMENT '权限',
+  `roleid` int(20) DEFAULT NULL COMMENT '角色',
+  `resourceid` int(100) DEFAULT NULL COMMENT '权限',
   `create_time` bigint(20) DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(20) DEFAULT NULL COMMENT '修改时间',
   `create_userid` int(11) DEFAULT NULL COMMENT '创建人',
@@ -348,13 +355,14 @@ CREATE TABLE `t_signet_apply` (
   `status` tinyint(4) DEFAULT NULL COMMENT '状态',
   `is_deleted` tinyint(4) DEFAULT NULL COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用印申请';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用印申请';
 
 -- ----------------------------
 -- Records of t_signet_apply
 -- ----------------------------
-INSERT INTO `t_signet_apply` VALUES ('1', '1', '1', null, '1', '1', null, '1', '1', '1492419292314', '1492419292314', '1', '1', null, null);
-INSERT INTO `t_signet_apply` VALUES ('2', null, '2', null, null, null, null, null, null, '1492425648103', '1492425648103', '1', '1', null, null);
+INSERT INTO `t_signet_apply` VALUES ('1', '1', '2', null, '1', '1', null, '1', '1', '1492419292314', '1492436203050', '1', '1', null, '1');
+INSERT INTO `t_signet_apply` VALUES ('2', null, '3', null, null, null, null, null, null, '1492425648103', '1492436136207', '1', '1', null, null);
+INSERT INTO `t_signet_apply` VALUES ('3', null, '2', null, null, null, null, null, null, '1492435662648', '1492435662648', '1', '1', null, null);
 
 -- ----------------------------
 -- Table structure for t_signet_apply_file
@@ -424,9 +432,10 @@ CREATE TABLE `t_user` (
   `status` tinyint(4) DEFAULT NULL COMMENT '状态',
   `is_deleted` tinyint(4) DEFAULT NULL COMMENT '是否删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户管理';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户管理';
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('2', '1', '1', '1', '1', '1492418686108', '1492418686108', '1', '1', null, null);
+INSERT INTO `t_user` VALUES ('2', '1', '1', '1', '1', '1492418686108', '1492438702759', '1', '1', null, '1');
+INSERT INTO `t_user` VALUES ('3', '白伟民', '4', 'baiweimin', '19880625', '1492438689916', '1492438698752', '1', '1', null, null);
