@@ -35,6 +35,11 @@ public interface RolePermissionMapper {
 		@Param("status")Byte status,
 		@Param("updateUserid")String updateUserid,
 		@Param("updateTime")Long updateTime);
+
+	int logicalDeleteByRoleid(
+        		@Param("roleid")Integer roleid);
+    List<RolePermission> selectByRoleid(
+    		@Param("roleid")Integer roleid);
 		
 
 }

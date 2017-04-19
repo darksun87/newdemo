@@ -1,261 +1,139 @@
 <div class="row">
 	<form id="signetApplyFormSearch">
-	<table class="formtable">
-		<tr>
-		<td>
-		<label for="id">ID:</label>
-	</td>
-	<td>
-		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
-    </td>
-				<td>
-		<label for="applyreason">申请理由:</label>
-	</td>
-	<td>
-		<input type="text" name="applyreason" class="easyui-textbox" placeholder="申请理由">
-    </td>
-				<td>
-		<label for="signetid">印章:</label>
-	</td>
-	<td>
-		<input type="text" name="signetid" class="easyui-textbox" placeholder="印章">
-    </td>
-				<td>
-		<label for="dgmTime">副总经理审批时间:</label>
-	</td>
-	<td>
-		<input type="text" name="dgmTime" class="easyui-datetimebox" placeholder="副总经理审批时间">
-    </td>
-	</tr>	<tr>		<td>
-		<label for="dgmResult">副总经理审批结果:</label>
-	</td>
-	<td>
-		<input type="text" name="dgmResult" class="easyui-textbox" placeholder="副总经理审批结果">
-    </td>
-				<td>
-		<label for="dgmSuggest">副总经理意见:</label>
-	</td>
-	<td>
-		<input type="text" name="dgmSuggest" class="easyui-textbox" placeholder="副总经理意见">
-    </td>
-				<td>
-		<label for="gmTime">总经理审批时间:</label>
-	</td>
-	<td>
-		<input type="text" name="gmTime" class="easyui-datetimebox" placeholder="总经理审批时间">
-    </td>
-				<td>
-		<label for="gmResult">总经理审批结果:</label>
-	</td>
-	<td>
-		<input type="text" name="gmResult" class="easyui-textbox" placeholder="总经理审批结果">
-    </td>
-	</tr>	<tr>		<td>
-		<label for="gmSuggest">总经理审批意见:</label>
-	</td>
-	<td>
-		<input type="text" name="gmSuggest" class="easyui-textbox" placeholder="总经理审批意见">
-    </td>
-				<td>
-		<label for="createTime">创建时间:</label>
-	</td>
-	<td>
-		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
-    </td>
-				<td>
-		<label for="updateTime">修改时间:</label>
-	</td>
-	<td>
-		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
-    </td>
-				<td>
-		<label for="createUserid">创建人:</label>
-	</td>
-	<td>
-		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
-    </td>
-	</tr>	<tr>		<td>
-		<label for="updateUserid">修改人:</label>
-	</td>
-	<td>
-		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
-    </td>
-				<td>
-		<label for="status">状态:</label>
-	</td>
-	<td>
-		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
-    </td>
-				<td>
-		<label for="isDeleted">是否删除:</label>
-	</td>
-	<td>
-		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
-    </td>
-	</tr>			</table>
-	<div>
-		<a href="#" onclick="searchSignetApply()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
-	</div>
+		<table class="formtable">
+			<tr>
+				<td><label for="applyreason">申请理由:</label></td>
+				<td><input type="text" name="applyreason"
+					class="easyui-textbox" placeholder="申请理由"></td>
+				<td><label for="signetid">印章:</label></td>
+				<td>			
+					<select id="signetid_search" name="signetid" class="easyui-combobox" style="width:173px;">
+					<option value="-1">全部</option>
+					#foreach($signet in $signets)
+						<option value="${signet.id}">${signet.signetname}</option>
+					#end
+					</select>
+				</td>
+				<td><label for="createUserid">申请人:</label></td>
+				<td><input type="text" name="createUserid"
+					class="easyui-textbox" placeholder="创建人"></td>
+			</tr>
+			<tr>
+				<td><label for="createTime">开始时间:</label></td>
+				<td><input type="text" name="createTime"
+					class="easyui-datetimebox" placeholder="创建时间"></td>
+				<td><label for="createTime">结束时间:</label></td>
+				<td><input type="text" name="createTime"
+					class="easyui-datetimebox" placeholder="创建时间"></td>
+				<td style="text-align: center;" colspan="2">
+					<div>
+						<a href="#" onclick="searchSignetApply()"
+							class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
 <div class="row">
 	<div id="signetApplyTableToolBar">
-		<a href="#" onclick="showSignetApplyDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
+		<a href="#" onclick="showSignetApplyDialog()"
+			class="easyui-linkbutton"
+			data-options="iconCls:'icon-edit',plain:true">新增</a>
 	</div>
 	<table id="signetApplyTable">
-        <thead>
-        <tr>
-    		    			<th data-options="field:'id'">ID</th>
-			    			<th data-options="field:'applyreason'">申请理由</th>
-			    			<th data-options="field:'signetid'">印章</th>
-			    			<th data-options="field:'dgmTime',formatter:dateFormatter">副总经理审批时间</th>
-			    			<th data-options="field:'dgmResult'">副总经理审批结果</th>
-			    			<th data-options="field:'dgmSuggest'">副总经理意见</th>
-			    			<th data-options="field:'gmTime',formatter:dateFormatter">总经理审批时间</th>
-			    			<th data-options="field:'gmResult'">总经理审批结果</th>
-			    			<th data-options="field:'gmSuggest'">总经理审批意见</th>
-			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
-			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
-			    			<th data-options="field:'createUserid'">创建人</th>
-			    			<th data-options="field:'updateUserid'">修改人</th>
-			    			<th data-options="field:'status'">状态</th>
-			    			<th data-options="field:'isDeleted'">是否删除</th>
-						<th data-options="field:'action',formatter:signetApplyActionFormatter">操作</th>
-        </tr>
-        </thead>
-    </table>
+		<thead>
+			<tr>
+				<th data-options="field:'id'">ID</th>
+				<th data-options="field:'applyreason'">申请理由</th>
+				<th data-options="field:'signetname'">印章</th>
+				<th data-options="field:'createUserid'">申请人</th>
+				<th data-options="field:'createTime',formatter:dateFormatter">申请时间</th>
+				<th data-options="field:'dgmTime',formatter:dateFormatter">副总经理审批时间</th>
+				<th data-options="field:'dgmResult'">副总经理审批结果</th>
+				<th data-options="field:'dgmSuggest'">副总经理意见</th>
+				<th data-options="field:'gmTime',formatter:dateFormatter">总经理审批时间</th>
+				<th data-options="field:'gmResult'">总经理审批结果</th>
+				<th data-options="field:'gmSuggest'">总经理审批意见</th>
+				<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+				<th data-options="field:'updateUserid'">修改人</th>
+				<th data-options="field:'status'">状态</th>
+				<th data-options="field:'isDeleted'">是否删除</th>
+				<th
+					data-options="field:'action',formatter:signetApplyActionFormatter">操作</th>
+			</tr>
+		</thead>
+	</table>
 </div>
-<div id="signetApplyModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
+<div id="signetApplyModal" class="easyui-dialog" title="My Dialog"
+	style="padding: 30px;"
 	data-options="modal:true,buttons:'#signetApplyDialogButtons',closed:true">
 	<div class="dialog-body">
-	<form id="signetApplyForm" method="post">
-		<table class="formtable">
-						<tr>
-            	<td>
-            		<label for="id">ID:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="applyreason">申请理由:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="applyreason" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="signetid">印章:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="signetid" class="easyui-numberbox"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="dgmTime">副总经理审批时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="dgmTime" class="easyui-datetimebox"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="dgmResult">副总经理审批结果:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="dgmResult" class="easyui-textbox" data-options="validType:['length[0,10]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="dgmSuggest">副总经理意见:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="dgmSuggest" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="gmTime">总经理审批时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="gmTime" class="easyui-datetimebox"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="gmResult">总经理审批结果:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="gmResult" class="easyui-textbox" data-options="validType:['length[0,10]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="gmSuggest">总经理审批意见:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="gmSuggest" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="createTime">创建时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="updateTime">修改时间:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="createUserid">创建人:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="updateUserid">修改人:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="status">状态:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-						<tr>
-            	<td>
-            		<label for="isDeleted">是否删除:</label>
-            	</td>
-            	<td>
-            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
-                </td>
-            </tr>
-			   		</table>
-		<div id="signetApplyDialogButtons">
-			<a href="#" id="btnSaveSignetApply" data-options="iconCls:'icon-save'" onclick="submitSignetApplyForm()" class="easyui-linkbutton">确认</a>  
-			<a href="#" id="backbtn" onclick="closeSignetApplyDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
-		</div>
-	</form>
+		<form id="signetApplyForm" method="post">
+			<table class="formtable">
+				<tr>
+					<td><label for="id">ID:</label></td>
+					<td><input type="text" name="id" class="easyui-textbox"
+						editable="false" /></td>
+				</tr>
+				<tr>
+					<td><label for="applyreason">申请理由:</label></td>
+					<td><input type="text" name="applyreason"
+						class="easyui-textbox" data-options="validType:['length[0,100]']" />
+					</td>
+					<td><label for="signetid">印章:</label></td>
+					<td><select id="signetid" name="signetid"
+						class="easyui-combobox" style="width:173px;">
+						#foreach($signet in $signets)
+							<option value="${signet.id}">${signet.signetname}</option>
+						#end
+					</select></td>
+				</tr>
+				<tr>
+					<td><label for="createUserid">申请人:</label></td>
+					<td><input type="text" name="createUserid"
+						class="easyui-textbox" editable="false" /></td>
+					<td><label for="createTime">申请时间:</label></td>
+					<td><input type="text" name="createTime"
+						class="easyui-textbox" editable="false" /></td>
+				</tr>
+				<tr>
+					<td><label for="dgmTime">副总经理审批时间:</label></td>
+					<td><input type="text" name="dgmTime"
+						class="easyui-datetimebox" /></td>
+					<td><label for="dgmResult">副总经理审批结果:</label></td>
+					<td><input type="text" name="dgmResult" class="easyui-textbox"
+						data-options="validType:['length[0,10]']" /></td>
+				</tr>
+				<tr>
+					<td><label for="dgmSuggest">副总经理意见:</label></td>
+					<td colspan="3"><input type="text" name="dgmSuggest"
+						class="easyui-textbox" data-options="validType:['length[0,100]']"
+						style="width:467px;" /></td>
+				</tr>
+				<tr>
+					<td><label for="gmTime">总经理审批时间:</label></td>
+					<td><input type="text" name="gmTime"
+						class="easyui-datetimebox" /></td>
+					<td><label for="gmResult">总经理审批结果:</label></td>
+					<td><input type="text" name="gmResult" class="easyui-textbox"
+						data-options="validType:['length[0,10]']" /></td>
+				</tr>
+				<tr>
+					<td><label for="gmSuggest">总经理审批意见:</label></td>
+					<td colspan="3"><input type="text" name="gmSuggest"
+						class="easyui-textbox" data-options="validType:['length[0,100]']"
+						style="width:467px;" /></td>
+				</tr>
+			</table>
+			<div id="signetApplyDialogButtons">
+				<a href="#" id="btnSaveSignetApply"
+					data-options="iconCls:'icon-save'"
+					onclick="submitSignetApplyForm()" class="easyui-linkbutton">确认</a>
+				<a href="#" id="backbtn" onclick="closeSignetApplyDialog()"
+					class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+			</div>
+		</form>
 	</div>
 </div>
 <script>
@@ -340,12 +218,12 @@
 		var signetApplyForm = $('#signetApplyForm');
 		if (rowData) {
 			signetApplyModal.dialog({
-				title : "编辑应用"
+				title : "编辑"
 			});
 			signetApplyForm.form('load', rowData);
 		} else {
 			signetApplyModal.dialog({
-				title : "新增应用"
+				title : "新增"
 			});
 			signetApplyForm.form('clear');
 		}
