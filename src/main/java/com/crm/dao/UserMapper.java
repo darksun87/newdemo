@@ -24,11 +24,6 @@ public interface UserMapper {
 	User selectByPrimaryKeyForUpdate(Integer id);
 	
     List<User> selectAll();
-    List<User> checkUser(
-    		@Param("loginname")String loginname,
-    		@Param("password")String password);
-    List<User> getUserByLoginname(
-    		@Param("loginname")String loginname);
 
 	List<User> queryUser(UserQuery userQuery);
 			

@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,6 @@ import com.crm.model.RolePermission;
 import com.crm.model.RolePermissionQuery;
 import com.crm.model.Message;
 import com.crm.model.QueryResult;
-import com.crm.model.User;
 
 @Controller
 @RequestMapping("rolePermission")
@@ -52,11 +49,6 @@ public class RolePermissionController {
 	public List<RolePermission> getAll() {
 		return rolePermissionBiz.getAllRolePermission().getData();
 	}
-	@RequestMapping("getByRoleid")
-	@ResponseBody
-	public List<RolePermission> getByRoleid(Integer roleid) {
-		return rolePermissionBiz.getPermissionByRoleid(roleid).getData();
-	}
 	
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	@ResponseBody
@@ -69,15 +61,6 @@ public class RolePermissionController {
 			rolePermission.setUpdateUserid(1);
 			return rolePermissionBiz.updateRolePermission(rolePermission);
 		}
-	}
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "saveByRoleid", method = RequestMethod.POST)
-	@ResponseBody
-	public Message<Integer> saveByRoleid(Integer[] resourceids, Integer roleid, HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-		Message<User> user = (Message<User>)session.getAttribute("user");
-		return rolePermissionBiz.savePermissionBYroleid(resourceids, roleid, user.getData().getId());
 	}
 
 	@RequestMapping("delete")

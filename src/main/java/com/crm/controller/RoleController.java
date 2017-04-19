@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +17,6 @@ import com.crm.model.Role;
 import com.crm.model.RoleQuery;
 import com.crm.model.Message;
 import com.crm.model.QueryResult;
-import com.crm.service.system.SystemService;
 
 @Controller
 @RequestMapping("role")
@@ -26,14 +24,10 @@ public class RoleController {
 
 	@Resource
 	private RoleBiz roleBiz;
-	@Autowired
-	private SystemService systemService;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		List<com.crm.model.Resource> menus = systemService.selectMenuByPid(0);
-		modelMap.put("menu", menus);
 		return new ModelAndView("role/index", modelMap);
 	}
 
