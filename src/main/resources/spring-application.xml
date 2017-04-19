@@ -14,5 +14,6 @@
                   
     <bean id="mapperFactory" class="com.crm.data.MapperFactory" scope="singleton">
 		<property name="masterConfigLoation" value="classpath:master.xml" />
+		<property name="slaveConfigLoation" value="classpath:master.xml" />
 	</bean>
 </beans> 

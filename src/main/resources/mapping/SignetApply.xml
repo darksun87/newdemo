@@ -25,7 +25,7 @@
 	</delete>
 	
 	<insert id="insert" parameterType="com.crm.model.SignetApply" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_signet_apply (
+		INSERT INTO t_signet_apply  (
 			applyreason,
 			signetid,
 			dgm_time,
@@ -86,7 +86,7 @@
 		
 			
 	<update id="logicalDeleteByPrimaryKey">
-		UPDATE t_signet_apply
+		UPDATE t_signet_apply 
 		SET
     		update_time=#{updateTime,jdbcType=BIGINT},
     		update_userid=#{updateUserid,jdbcType=VARCHAR},
@@ -95,27 +95,32 @@
 	</update>
 		
 	<sql id="selectFields">
-	id,applyreason,signetid,dgm_time,dgm_result,dgm_suggest,gm_time,gm_result,gm_suggest,create_time,update_time,create_userid,update_userid,status,is_deleted
+	t.id,t.applyreason,t.signetid,t.dgm_time,t.dgm_result,t.dgm_suggest,t.gm_time,t.gm_result,t.gm_suggest,t.create_time,t.update_time,t.create_userid,t.update_userid,t.status,t.is_deleted,t1.signetname
+	</sql>
+	<sql id="joinSignet">
+	left join t_signet t1 on t1.id=t.signetid
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM t_signet_apply
+		FROM t_signet_apply t 	
+		<include refid="joinSignet" />	
 	</select>
 	
 	<select id="querySignetApply" resultMap="BaseResultMap" parameterType="com.crm.model.SignetApplyQuery">
 		SELECT
 		<include refid="selectFields" />
-		FROM t_signet_apply
+		FROM t_signet_apply t
+		<include refid="joinSignet" />	
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+					<if test="id!=null">AND t.id = #{id,jdbcType=INTEGER}</if>
 								<if test="applyreason!=null and applyreason!=''">AND applyreason = #{applyreason,jdbcType=VARCHAR}</if>
-								<if test="signetid!=null">AND signetid = #{signetid,jdbcType=BIGINT}</if>
+								<if test="signetid!=null and signetid!=-1">AND signetid = #{signetid,jdbcType=BIGINT}</if>
 								<if test="dgmTime!=null">AND dgm_time = #{dgmTime,jdbcType=BIGINT}</if>
 								<if test="dgmResult!=null and dgmResult!=''">AND dgm_result = #{dgmResult,jdbcType=VARCHAR}</if>
 								<if test="dgmSuggest!=null and dgmSuggest!=''">AND dgm_suggest = #{dgmSuggest,jdbcType=VARCHAR}</if>
@@ -139,15 +144,17 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
 		<include refid="selectFields" />
-		FROM t_signet_apply
-		WHERE id = #{id,jdbcType=INTEGER} 
+		FROM t_signet_apply t
+		<include refid="joinSignet" />	
+		WHERE t.id = #{id,jdbcType=INTEGER} 
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
 		<include refid="selectFields" />
-		FROM t_signet_apply
-		WHERE id = #{id,jdbcType=INTEGER} 
+		FROM t_signet_apply t
+		<include refid="joinSignet" />	
+		WHERE t.id = #{id,jdbcType=INTEGER} 
 		FOR UPDATE
 	</select>
 		

@@ -129,12 +129,12 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from resource
+    from resource order by rank
   </select>
   <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from resource
-    where pid = #{id,jdbcType=INTEGER}
+    where pid = #{id,jdbcType=INTEGER} order by rank
   </select>
 </mapper>

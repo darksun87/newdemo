@@ -27,24 +27,8 @@ public enum MessageStatus{
 	API_NOT_SUPPORT_METHOD(10103, "只接受Post请求"),
 	API_INVLID_DATA_FORMAT(10104, "数据格式不符合要求"),
 	API_INVLID_API(10105, "api【%s】不存在"),
-
-	//字典code 数据
-	SALE_CHANNEL_CODE(115,"销售渠道表"),
-	ONLINE_SUPPLIED_BY_CODE(116,"电商发货方式表"),
-	STORE_SUPPLIED_BY_CODE(118,"便利店发货方式表"),
-	SUPPORT_SHIPPING_CODE(117,"配送方式表"),
-	SUPPORTSHIPPINGAREA_SHIPPING_CODE(121,"商品配送范围表"),
-	
-	//联系人code 数据
-	FINANCIAL_CONTACT(1037,"财务联系人"),
-	SALES_CONTACT(1038,"销售联系人"),
-	LOGISTICS_CONTACT(1039,"物流联系人"),
-	
-	SKUMERCHANT_D_ONLY(1101,"商品只能有一个供应商"),
-	
-	SKUMERCHANT_SAME(1102,"商品与供应商关系以存在"),
-	
-	ITEM_SAME(1201,"商品选型已存在"),
+	//
+	LOGIN_NOT_VALID(11001, "登录验证错误")
 	;
 
 	private int status;
