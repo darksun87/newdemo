@@ -1,68 +1,156 @@
 <div class="row">
 	<form id="departmentFormSearch">
-		<table class="formtable">
-			<tr>
-				<td><label for="departmentname">部门名称:</label></td>
-				<td><input type="text" name="departmentname"
-					class="easyui-textbox" placeholder="部门名称"></td>
+	<table class="formtable">
+		<tr>
+		<td>
+		<label for="id">ID:</label>
+	</td>
+	<td>
+		<input type="text" name="id" class="easyui-textbox" placeholder="ID">
+    </td>
 				<td>
-					<div>
-						<a href="#" onclick="searchDepartment()" class="easyui-linkbutton"
-							data-options="iconCls:'icon-search'">搜索</a>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<label for="departmentname">部门名称:</label>
+	</td>
+	<td>
+		<input type="text" name="departmentname" class="easyui-textbox" placeholder="部门名称">
+    </td>
+				<td>
+		<label for="createTime">创建时间:</label>
+	</td>
+	<td>
+		<input type="text" name="createTime" class="easyui-datetimebox" placeholder="创建时间">
+    </td>
+				<td>
+		<label for="updateTime">修改时间:</label>
+	</td>
+	<td>
+		<input type="text" name="updateTime" class="easyui-datetimebox" placeholder="修改时间">
+    </td>
+	</tr>	<tr>		<td>
+		<label for="createUserid">创建人:</label>
+	</td>
+	<td>
+		<input type="text" name="createUserid" class="easyui-textbox" placeholder="创建人">
+    </td>
+				<td>
+		<label for="updateUserid">修改人:</label>
+	</td>
+	<td>
+		<input type="text" name="updateUserid" class="easyui-textbox" placeholder="修改人">
+    </td>
+				<td>
+		<label for="status">状态:</label>
+	</td>
+	<td>
+		<input type="text" name="status" class="easyui-textbox" placeholder="状态">
+    </td>
+				<td>
+		<label for="isDeleted">是否删除:</label>
+	</td>
+	<td>
+		<input type="text" name="isDeleted" class="easyui-textbox" placeholder="是否删除">
+    </td>
+	</tr>			</table>
+	<div>
+		<a href="#" onclick="searchDepartment()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	</div>
 	</form>
 </div>
 <div class="row">
 	<div id="departmentTableToolBar">
-		<a href="#" onclick="showDepartmentDialog()" class="easyui-linkbutton"
-			data-options="iconCls:'icon-edit',plain:true">新增</a>
+		<a href="#" onclick="showDepartmentDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">新增</a>
 	</div>
 	<table id="departmentTable">
-		<thead>
-			<tr>
-				<th data-options="field:'id'">ID</th>
-				<th data-options="field:'departmentname'">部门名称</th>
-				<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
-				<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
-				<th data-options="field:'createUserid'">创建人</th>
-				<th data-options="field:'updateUserid'">修改人</th>
-				<th data-options="field:'status'">状态</th>
-				<th data-options="field:'isDeleted'">是否删除</th>
-				<th
-					data-options="field:'action',formatter:departmentActionFormatter">操作</th>
-			</tr>
-		</thead>
-	</table>
+        <thead>
+        <tr>
+    		    			<th data-options="field:'id'">ID</th>
+			    			<th data-options="field:'departmentname'">部门名称</th>
+			    			<th data-options="field:'createTime',formatter:dateFormatter">创建时间</th>
+			    			<th data-options="field:'updateTime',formatter:dateFormatter">修改时间</th>
+			    			<th data-options="field:'createUserid'">创建人</th>
+			    			<th data-options="field:'updateUserid'">修改人</th>
+			    			<th data-options="field:'status'">状态</th>
+			    			<th data-options="field:'isDeleted'">是否删除</th>
+						<th data-options="field:'action',formatter:departmentActionFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
 </div>
-<div id="departmentModal" class="easyui-dialog" title="My Dialog"
-	style="padding:30px;"
+<div id="departmentModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
 	data-options="modal:true,buttons:'#departmentDialogButtons',closed:true">
 	<div class="dialog-body">
-		<form id="departmentForm" method="post">
-			<table class="formtable">
-				<tr>
-					<td><label for="id">ID:</label></td>
-					<td><input type="text" name="id" class="easyui-textbox"
-						editable="false" /></td>
-				</tr>
-				<tr>
-					<td><label for="departmentname">部门名称:</label></td>
-					<td><input type="text" name="departmentname"
-						class="easyui-textbox" data-options="validType:['length[0,100]']" />
-					</td>
-				</tr>
-			</table>
-			<div id="departmentDialogButtons">
-				<a href="#" id="btnSaveDepartment"
-					data-options="iconCls:'icon-save'" onclick="submitDepartmentForm()"
-					class="easyui-linkbutton">确认</a> <a href="#" id="backbtn"
-					onclick="closeDepartmentDialog()" class="easyui-linkbutton"
-					data-options="iconCls:'icon-cancel'">取消</a>
-			</div>
-		</form>
+	<form id="departmentForm" method="post">
+		<table class="formtable">
+						<tr>
+            	<td>
+            		<label for="id">ID:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="id" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="departmentname">部门名称:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="departmentname" class="easyui-textbox" data-options="validType:['length[0,100]']"    />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createTime">创建时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateTime">修改时间:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateTime" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="createUserid">创建人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="createUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="updateUserid">修改人:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="updateUserid" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="status">状态:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="status" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+						<tr>
+            	<td>
+            		<label for="isDeleted">是否删除:</label>
+            	</td>
+            	<td>
+            		<input type="text" name="isDeleted" class="easyui-textbox"    editable="false"  />
+                </td>
+            </tr>
+			   		</table>
+		<div id="departmentDialogButtons">
+			<a href="#" id="btnSaveDepartment" data-options="iconCls:'icon-save'" onclick="submitDepartmentForm()" class="easyui-linkbutton">确认</a>  
+			<a href="#" id="backbtn" onclick="closeDepartmentDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+		</div>
+	</form>
 	</div>
 </div>
 <script>
@@ -147,12 +235,12 @@
 		var departmentForm = $('#departmentForm');
 		if (rowData) {
 			departmentModal.dialog({
-				title : "编辑"
+				title : "编辑应用"
 			});
 			departmentForm.form('load', rowData);
 		} else {
 			departmentModal.dialog({
-				title : "新增"
+				title : "新增应用"
 			});
 			departmentForm.form('clear');
 		}

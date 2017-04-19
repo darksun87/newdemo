@@ -6,7 +6,7 @@ public class RolePermission {
 
         public static final String ID = "ID";
         public static final String ROLEID = "角色";
-        public static final String RESOURCEID = "权限";
+        public static final String URL = "权限";
         public static final String CREATE_TIME = "创建时间";
         public static final String UPDATE_TIME = "修改时间";
         public static final String CREATE_USERID = "创建人";
@@ -23,12 +23,12 @@ public class RolePermission {
 	/**
 	 * @Fields roleid : 角色
 	 */
-	private Integer roleid;
+	private Long roleid;
 	
 	/**
 	 * @Fields url : 权限
 	 */
-	private Integer resourceid;
+	private String url;
 	
 	/**
 	 * @Fields createTime : 创建时间
@@ -69,23 +69,22 @@ public class RolePermission {
 		this.id = id;
 	}
     
-    
-	public Integer getRoleid() {
+	public Long getRoleid(){
 		return roleid;
 	}
-
-	public void setRoleid(Integer roleid) {
+	
+	public void setRoleid(Long roleid){
 		this.roleid = roleid;
 	}
-
-	public Integer getResourceid() {
-		return resourceid;
+    
+	public String getUrl(){
+		return url;
 	}
-
-	public void setResourceid(Integer resourceid) {
-		this.resourceid = resourceid;
+	
+	public void setUrl(String url){
+		this.url = url;
 	}
-
+    
 	public Long getCreateTime(){
 		return createTime;
 	}

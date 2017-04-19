@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,13 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.crm.biz.UserBiz;
-import com.crm.model.Department;
 import com.crm.model.User;
 import com.crm.model.UserQuery;
 import com.crm.model.Message;
 import com.crm.model.QueryResult;
-import com.crm.service.system.FillOptionService;
-import com.crm.service.system.SystemService;
 
 @Controller
 @RequestMapping("user")
@@ -28,14 +24,10 @@ public class UserController {
 
 	@Resource
 	private UserBiz userBiz;
-	@Autowired
-	private FillOptionService fillOptionService;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		List<Department> departments = fillOptionService.selectDepartments();
-		modelMap.put("departments", departments);
 		return new ModelAndView("user/index", modelMap);
 	}
 
