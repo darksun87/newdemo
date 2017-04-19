@@ -3,8 +3,8 @@
 <mapper namespace="com.crm.dao.RolePermissionMapper">
 	<resultMap id="BaseResultMap" type="com.crm.model.RolePermission">
 					<id column="id" property="id" jdbcType="INTEGER" />
-								<result column="roleid" property="roleid" jdbcType="INTEGER" />
-								<result column="resourceid" property="resourceid" jdbcType="INTEGER" />
+								<result column="roleid" property="roleid" jdbcType="BIGINT" />
+								<result column="url" property="url" jdbcType="VARCHAR" />
 								<result column="create_time" property="createTime" jdbcType="BIGINT" />
 								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
 								<result column="create_userid" property="createUserid" jdbcType="INTEGER" />
@@ -18,14 +18,10 @@
 		WHERE id = #{id,jdbcType=INTEGER} 
 	</delete>
 	
-	<delete id="logicalDeleteByRoleid" parameterType="java.lang.Integer">
-		DELETE FROM t_role_permission
-		WHERE roleid = #{roleid,jdbcType=INTEGER} 
-	</delete>
 	<insert id="insert" parameterType="com.crm.model.RolePermission" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO t_role_permission (
 			roleid,
-			resourceid,
+			url,
 			create_time,
 			update_time,
 			create_userid,
@@ -35,7 +31,7 @@
 		VALUES
 		(
 			#{roleid,jdbcType=BIGINT},
-			#{resourceid,jdbcType=VARCHAR},
+			#{url,jdbcType=VARCHAR},
 			#{createTime,jdbcType=BIGINT},
 			#{createTime,jdbcType=BIGINT},
 			#{createUserid,jdbcType=INTEGER},
@@ -47,7 +43,7 @@
 	<update id="updateByPrimaryKey" parameterType="com.crm.model.RolePermission">
 		UPDATE t_role_permission
 		SET
-			<if test="resourceid!=null">resourceid = #{resourceid,jdbcType=VARCHAR},</if>
+			<if test="url!=null">url = #{url,jdbcType=VARCHAR},</if>
 			<if test="roleid!=null">roleid = #{roleid,jdbcType=BIGINT},</if>
 			update_userid = #{updateUserid,jdbcType=INTEGER},
 			update_time = #{updateTime,jdbcType=BIGINT}
@@ -75,19 +71,13 @@
 	</update>
 		
 	<sql id="selectFields">
-	id,roleid,resourceid,create_time,update_time,create_userid,update_userid,status,is_deleted
+	id,roleid,url,create_time,update_time,create_userid,update_userid,status,is_deleted
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM t_role_permission
-	</select>
-	<select id="selectByRoleid" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM t_role_permission
-		where  roleid = #{roleid,jdbcType=INTEGER} 
 	</select>
 	
 	<select id="queryRolePermission" resultMap="BaseResultMap" parameterType="com.crm.model.RolePermissionQuery">
@@ -100,8 +90,8 @@
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
-								<if test="roleid!=null">AND roleid = #{roleid,jdbcType=INTEGER}</if>
-								<if test="resourceid!=null">AND resourceid = #{resourceid,jdbcType=INTEGER}</if>
+								<if test="roleid!=null">AND roleid = #{roleid,jdbcType=BIGINT}</if>
+								<if test="url!=null and url!=''">AND url = #{url,jdbcType=VARCHAR}</if>
 								<if test="createTime!=null">AND create_time = #{createTime,jdbcType=BIGINT}</if>
 								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
 								<if test="createUserid!=null">AND create_userid = #{createUserid,jdbcType=INTEGER}</if>

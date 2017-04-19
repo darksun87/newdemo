@@ -100,7 +100,7 @@
 <div id="fileModal" class="easyui-dialog" title="My Dialog" style="width: 800px; height: 600px;"
 	data-options="modal:true,buttons:'#fileDialogButtons',closed:true">
 	<div class="dialog-body">
-	<form id="fileForm" method="post" enctype="multipart/form-data">
+	<form id="fileForm" method="post">
 		<table class="formtable">
 						<tr>
             	<td>
@@ -136,10 +136,10 @@
             </tr>
 						<tr>
             	<td>
-            		<label for="attachment">附件 1:</label>
+            		<label for="attachment">附件 :</label>
             	</td>
             	<td>
-            		<input type="file" name="attachment"/>
+            		<input type="text" name="attachment" class="easyui-textbox" data-options="validType:['length[0,2147483647]']"    />
                 </td>
             </tr>
 						<tr>

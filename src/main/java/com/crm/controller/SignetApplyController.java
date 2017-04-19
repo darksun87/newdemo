@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,12 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.crm.biz.SignetApplyBiz;
-import com.crm.model.Signet;
 import com.crm.model.SignetApply;
 import com.crm.model.SignetApplyQuery;
 import com.crm.model.Message;
 import com.crm.model.QueryResult;
-import com.crm.service.system.FillOptionService;
 
 @Controller
 @RequestMapping("signetApply")
@@ -27,15 +24,10 @@ public class SignetApplyController {
 
 	@Resource
 	private SignetApplyBiz signetApplyBiz;
-	
-	@Autowired
-	private FillOptionService fillOptionService;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		List<Signet> signets = fillOptionService.selectSignets();
-		modelMap.put("signets", signets);
 		return new ModelAndView("signetApply/index", modelMap);
 	}
 

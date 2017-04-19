@@ -19,7 +19,6 @@ public class SignetApply {
         public static final String UPDATE_USERID = "修改人";
         public static final String STATUS = "状态";
         public static final String IS_DELETED = "是否删除";
-        public static final String SIGNETNAME = "印章名称";
     
 	
 	/**
@@ -96,12 +95,7 @@ public class SignetApply {
 	 * @Fields isDeleted : 是否删除
 	 */
 	private Byte isDeleted;
-
-	
-	/**
-	 * @Fields signetname : 印章名称
-	 */
-	private String signetname;
+		
     
 	public Integer getId(){
 		return id;
@@ -222,13 +216,4 @@ public class SignetApply {
 	public void setIsDeleted(Byte isDeleted){
 		this.isDeleted = isDeleted;
 	}
-
-	public String getSignetname() {
-		return signetname;
-	}
-
-	public void setSignetname(String signetname) {
-		this.signetname = signetname;
-	}
-	
-}
+    }
