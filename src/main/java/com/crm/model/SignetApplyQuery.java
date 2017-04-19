@@ -33,8 +33,6 @@ public class SignetApplyQuery extends Query {
 	private Byte status;
 			
 	private Byte isDeleted;
-	
-	private String signetname;
 		
     
 	public Integer getId(){
@@ -141,11 +139,4 @@ public class SignetApplyQuery extends Query {
 	public void setIsDeleted(Byte isDeleted){
 		this.isDeleted = isDeleted;
 	}
-	public String getSignetname() {
-		return signetname;
-	}
-	public void setSignetname(String signetname) {
-		this.signetname = signetname;
-	}
-	
-}
+    }
